@@ -1,0 +1,19 @@
+
+New History: Main.
+  Narrador: Use Narrador: to comment
+  you end the comment with .
+
+  Narrador: Declare variables.
+  Hi Number.
+
+  Narrador: Print with I say.
+  I say: Can you tell me the Number.
+
+  Narrador: Input with How are you?.
+  How are you? Number.
+
+  Narrador: I say that to print not strings.
+  I say that: Number.
+  End.
+Narrador: Listo.
+  
