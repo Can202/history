@@ -11,6 +11,7 @@ protagonistname = ""
 friendname = ""
 path = ""
 savepath = "export.py"
+variables = []
 
 if len(sys.argv) > 1:
     for u in range(len(sys.argv)):
@@ -55,6 +56,7 @@ if len(sys.argv) > 1:
                         save += "\n"
                 elif commands[i].startswith("Hi "):
                     var = commands[i][3:len(commands[i])]
+                    variables.append(var)
                     save += init + var + " = None"
                     save += "\n"
                 elif commands[i].startswith(protagonistname + " says "):
@@ -72,8 +74,7 @@ if len(sys.argv) > 1:
                 elif commands[i].startswith(friendname + " ask to " + protagonistname):
                     save += init + friendname + " = input()"
                     save += "\n"
-                    
-                if commands[i].startswith("End"):
+                elif commands[i].startswith("End"):
                     if len(commands[i]) <= 3:
                         save += init + "return 0"
                         save += "\n"
@@ -83,9 +84,12 @@ if len(sys.argv) > 1:
                         save += init + "return " + var
                         save += "\n"
                         init = init[:-4]
-                #if "New History:" in commands[i]:
-                #    name = commands[i].split(" ")
-                #    print("New History is ")
+                else:
+                    for u in range(len(variables)):
+                        if commands[i].startswith(variables[u] + " is "):
+                            var = commands[i][len(variables[u] + " is "):len(commands[i])]
+                            save += init + variables[u] + " = " + var
+                            save += "\n"
             save += "main()"
             save += "\n"
             exp = open(savepath, "w")
