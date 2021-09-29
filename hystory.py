@@ -25,6 +25,9 @@ if len(sys.argv) > 1:
             continue
         elif sys.argv[u-1] == "--save":
             savepath = sys.argv[u]
+        elif sys.argv[u] == "--version" or sys.argv[u] == "-v":
+            print("0.0.1")
+            exit()
         elif sys.argv[u] == "--python":
             pythonexport = True
         elif "--" not in sys.argv[u]:
