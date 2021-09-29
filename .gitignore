@@ -1,6 +1,10 @@
 
 export.py
 .vscode/
+*.exe
+*.out
+export/
+bin/
 
 # Byte-compiled / optimized / DLL files
 
