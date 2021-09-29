@@ -1,0 +1,13 @@
+Protagonist is Pepe.
+Principal.
+  Now go to pHW.
+  Now go to printtext With "Hola".
+  End.
+
+New History: pHW.
+  Pepe says Hello World.
+  End.
+
+New History: printtext With text.
+  Pepe repeat text.
+  End.

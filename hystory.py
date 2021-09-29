@@ -40,13 +40,27 @@ if len(sys.argv) > 1:
                     friendname = func
                 if commands[i].lower().startswith("new history: "):
                     func = commands[i][len("New History: "):len(commands[i])]
-                    save += init + "def " + func + "():"
+                    if " With " in commands[i]:
+                        parameter = func[func.find(" With ") + 6: len(func)]
+                        func = func[0:func.find(" With ")]
+                        save += init + "def " + func + "(" + parameter + "):"
+                    else:
+                        save += init + "def " + func + "():"
                     save += "\n"
                     init += "    "
                 if commands[i].lower().startswith("principal"):
                     save += init + "def main():"
                     save += "\n"
                     init += "    "
+                if commands[i].startswith("Now go to "):
+                    func = commands[i][len("Now go to "):len(commands[i])]
+                    if " With " in commands[i]:
+                        parameter = func[func.find(" With ") + 6: len(func)]
+                        func = func[0:func.find(" With ")]
+                        save += init + func + "(" + parameter + ")"
+                    else:
+                        save += init + func + "()"
+                    save += "\n"
                 elif commands[i].lower().startswith("narrador says "):
                     newlines = commands[i].split("\n")
                     for j in range(len(newlines)):
