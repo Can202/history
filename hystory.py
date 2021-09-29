@@ -49,6 +49,7 @@ if len(sys.argv) > 1:
                         save += "\n"
                 else:
                     commands[i] = commands[i].replace(",", ".")
+                    commands[i] = commands[i].replace("´", ",")
                     if commands[i].lower().startswith("protagonist is "):
                         func = commands[i][len("protagonist is "):len(commands[i])]
                         protagonistname = func
