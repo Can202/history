@@ -1,6 +1,8 @@
 import os
 import sys
 from sys import exit
+import shutil
+import PyInstaller.__main__
 
 # Compiler 
 # (Transform to py)
@@ -135,6 +137,22 @@ if len(sys.argv) > 1:
                 """)
                 os.system("cp /tmp/hystory/dist/a.out a.out")
                 os.system("rm -vrf /tmp/hystory/")
+            elif sys.platform == "win32":
+                exp = open("temp.py", "w")
+                exp.write(save)
+                exp.close()
+                PyInstaller.__main__.run([
+                    "temp.py",
+                    '--onefile',
+                    '-n',
+                    'a.exe'
+                ])
+                shutil.rmtree("build/", ignore_errors=True)
+                shutil.copyfile("dist/a.exe", "a.exe")
+                shutil.rmtree("dist/", ignore_errors=True)
+                shutil.rmtree("__pycache__/", ignore_errors=True)
+                os.remove("a.exe.spec")
+                os.remove("temp.py")
             else:
                 exp = open(savepath, "w")
                 exp.write(save)
