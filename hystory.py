@@ -9,9 +9,18 @@ init = ""
 save = ""
 protagonistname = ""
 friendname = ""
+path = ""
+savepath = "export.py"
 
 if len(sys.argv) > 1:
-    path = sys.argv[1]
+    for u in range(len(sys.argv)):
+        if u == 0:
+            continue
+        elif sys.argv[u-1] == "--save":
+            savepath = sys.argv[u]
+        elif "--" not in sys.argv[u]:
+            path = sys.argv[u]
+            break
     if os.path.exists(path):
         if path[len(path)-5:len(path)] == ".hyst":
             fiLE = open(path, "r")
@@ -52,8 +61,8 @@ if len(sys.argv) > 1:
                     var = commands[i][len(protagonistname + " says "):len(commands[i])]
                     save += init + "print(\"" + var + "\")"
                     save += "\n"
-                elif commands[i].startswith("I say that: "):
-                    var = commands[i][12:len(commands[i])]
+                elif commands[i].startswith(protagonistname + " repeat "):
+                    var = commands[i][len(protagonistname + " repeat "):len(commands[i])]
                     save += init + "print(" + var + ")"
                     save += "\n"
                 elif commands[i].startswith(friendname + " ask to " + protagonistname + " about "):
@@ -79,7 +88,7 @@ if len(sys.argv) > 1:
                 #    print("New History is ")
             save += "main()"
             save += "\n"
-            exp = open("export.py", "w")
+            exp = open(savepath, "w")
             exp.write(save)
             exp.close()
         else:
