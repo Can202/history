@@ -7,6 +7,8 @@ from sys import exit
 
 init = ""
 save = ""
+protagonistname = ""
+friendname = ""
 
 if len(sys.argv) > 1:
     path = sys.argv[1]
@@ -20,31 +22,46 @@ if len(sys.argv) > 1:
                 if len(commands[i]) > 0:
                     while commands[i].startswith(" ") or commands[i].startswith("\n"):
                         commands[i] = commands[i][1:len(commands[i])]
+                if commands[i].lower().startswith("protagonist is "):
+                    func = commands[i][len("protagonist is "):len(commands[i])]
+                    protagonistname = func
+                if commands[i].lower().startswith("friend is "):
+                    func = commands[i][len("friend is "):len(commands[i])]
+                    friendname = func
                 if commands[i].lower().startswith("new history: "):
                     func = commands[i][len("New History: "):len(commands[i])]
                     save += init + "def " + func + "():"
                     save += "\n"
                     init += "    "
-                elif commands[i].lower().startswith("narrador:"):
+                if commands[i].lower().startswith("principal"):
+                    save += init + "def main():"
+                    save += "\n"
+                    init += "    "
+                elif commands[i].lower().startswith("narrador says "):
                     newlines = commands[i].split("\n")
                     for j in range(len(newlines)):
+                        if newlines[j].lower().startswith("narrador says "):
+                            newlines[j]= newlines[j][14:len(newlines[j])]
                         save += init + "# " + newlines[j]
                         save += "\n"
                 elif commands[i].startswith("Hi "):
                     var = commands[i][3:len(commands[i])]
                     save += init + var + " = None"
                     save += "\n"
-                elif commands[i].startswith("I say: "):
-                    var = commands[i][7:len(commands[i])]
+                elif commands[i].startswith(protagonistname + " says "):
+                    var = commands[i][len(protagonistname + " says "):len(commands[i])]
                     save += init + "print(\"" + var + "\")"
                     save += "\n"
                 elif commands[i].startswith("I say that: "):
                     var = commands[i][12:len(commands[i])]
                     save += init + "print(" + var + ")"
                     save += "\n"
-                elif commands[i].lower().startswith("how are you? "):
-                    var = commands[i][13:len(commands[i])]
-                    save += init + var + " = input()"
+                elif commands[i].startswith(friendname + " ask to " + protagonistname + " about "):
+                    var = commands[i][len(friendname + " ask to " + protagonistname + " about "):len(commands[i])]
+                    save += init + friendname + " = input(\"" + var + "\")"
+                    save += "\n"
+                elif commands[i].startswith(friendname + " ask to " + protagonistname):
+                    save += init + friendname + " = input()"
                     save += "\n"
                     
                 if commands[i].startswith("End"):
@@ -60,7 +77,7 @@ if len(sys.argv) > 1:
                 #if "New History:" in commands[i]:
                 #    name = commands[i].split(" ")
                 #    print("New History is ")
-            save += "Main()"
+            save += "main()"
             save += "\n"
             exp = open("export.py", "w")
             exp.write(save)

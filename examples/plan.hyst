@@ -1,0 +1,16 @@
+Narrador says Narrador is commentaries.
+
+Narrador says This is the Protagonist.
+Protagonist is Alicia.
+
+Narrador says This is the Asker.
+Friend is Pepe.
+
+
+Narrador: Main function.
+Principal.
+  Narrador says Print in terminal.
+  Alicia says Hola Mundo!.
+  Pepe ask to Alicia.
+  Pepe ask to Alicia about Names.
+  End.
