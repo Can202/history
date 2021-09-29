@@ -122,9 +122,24 @@ if len(sys.argv) > 1:
                                 save += "\n"
             save += "main()"
             save += "\n"
-            exp = open(savepath, "w")
-            exp.write(save)
-            exp.close()
+
+            if sys.platform == "linux" or sys.platform == "linux2":
+                os.system("rm -vrf /tmp/hystory/")
+                os.system("mkdir -p /tmp/hystory/")
+                exp = open("/tmp/hystory/temp.py", "w")
+                exp.write(save)
+                exp.close()
+                os.system("""
+                cd /tmp/hystory/
+                pyinstaller -F -n a.out temp.py
+                """)
+                os.system("cp /tmp/hystory/dist/a.out a.out")
+                os.system("rm -vrf /tmp/hystory/")
+            else:
+                exp = open(savepath, "w")
+                exp.write(save)
+                exp.close()
+
         else:
             print("not hystory file")
     else:
