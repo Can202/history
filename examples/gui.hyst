@@ -3,9 +3,9 @@ Oz brings PySimpleGUI.
 
 Principal.
     Hi layout.
-    layout is [[PySimpleGUI,Text("Hi")]´ [PySimpleGUI,Button("Ok")]].
+    layout is [[PySimpleGUI,,Text("Hi")], [PySimpleGUI,,Button("Ok")]].
     Hi window.
-    window is PySimpleGUI,Window("Titulo"´ layout).
-    Now go to window,read().
-    Now go to window,close().
+    window is PySimpleGUI,Window("Titulo", layout).
+    Now go to window,,read().
+    Now go to window,,close().
 End.

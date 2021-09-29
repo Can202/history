@@ -4,6 +4,6 @@ Magic from colorama brings Fore.
 
 Protagonist is Carlos.
 Principal.
-    Carlos repeat colorama,Fore,GREEN + "Hi!" + colorama,Fore,RESET.
+    Carlos repeat Fore,,GREEN + "Hi!" + Fore,,RESET.
     End.
 
