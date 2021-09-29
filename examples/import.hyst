@@ -1,0 +1,8 @@
+Librarian is Magic.
+Magic brings colorama.
+
+Protagonist is Carlos.
+Principal.
+    Carlos repeat colorama,Fore,GREEN + "Hi!" + colorama,Fore,RESET.
+    End.
+

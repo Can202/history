@@ -9,6 +9,7 @@ init = ""
 save = ""
 protagonistname = ""
 friendname = ""
+librarianname = ""
 path = ""
 savepath = "export.py"
 variables = []
@@ -32,12 +33,16 @@ if len(sys.argv) > 1:
                 if len(commands[i]) > 0:
                     while commands[i].startswith(" ") or commands[i].startswith("\n"):
                         commands[i] = commands[i][1:len(commands[i])]
+                commands[i] = commands[i].replace(",", ".")
                 if commands[i].lower().startswith("protagonist is "):
                     func = commands[i][len("protagonist is "):len(commands[i])]
                     protagonistname = func
                 if commands[i].lower().startswith("friend is "):
                     func = commands[i][len("friend is "):len(commands[i])]
                     friendname = func
+                if commands[i].lower().startswith("librarian is "):
+                    func = commands[i][len("librarian is "):len(commands[i])]
+                    librarianname = func
                 if commands[i].lower().startswith("new history: "):
                     func = commands[i][len("New History: "):len(commands[i])]
                     if " With " in commands[i]:
@@ -80,6 +85,10 @@ if len(sys.argv) > 1:
                 elif commands[i].startswith(protagonistname + " repeat "):
                     var = commands[i][len(protagonistname + " repeat "):len(commands[i])]
                     save += init + "print(" + var + ")"
+                    save += "\n"
+                elif commands[i].startswith(librarianname + " brings "):
+                    var = commands[i][len(librarianname + " brings "):len(commands[i])]
+                    save += init + "import " + var
                     save += "\n"
                 elif commands[i].startswith(friendname + " ask to " + protagonistname + " about "):
                     var = commands[i][len(friendname + " ask to " + protagonistname + " about "):len(commands[i])]
