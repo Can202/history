@@ -26,7 +26,7 @@ if len(sys.argv) > 1:
         elif sys.argv[u-1] == "--save":
             savepath = sys.argv[u]
         elif sys.argv[u] == "--version" or sys.argv[u] == "-v":
-            print("0.0.1")
+            print("0.0.2")
             exit()
         elif sys.argv[u] == "--python":
             pythonexport = True
@@ -75,6 +75,15 @@ if len(sys.argv) > 1:
                     elif commands[i].startswith(friendname + " ask if "):
                         func = commands[i][len(friendname + " ask if "):len(commands[i])]
                         save += init + "if " + func + ":"
+                        save += "\n"
+                        init += "    "
+                    elif commands[i].startswith("So " + friendname + " ask if "):
+                        func = commands[i][len("So " + friendname + " ask if "):len(commands[i])]
+                        save += init + "elif " + func + ":"
+                        save += "\n"
+                        init += "    "
+                    elif commands[i].startswith("So"):
+                        save += init + "else:"
                         save += "\n"
                         init += "    "
                     elif commands[i].lower().startswith("principal"):
