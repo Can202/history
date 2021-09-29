@@ -13,7 +13,9 @@ protagonistname = ""
 friendname = ""
 librarianname = ""
 path = ""
-savepath = "export.py"
+savepath = "a.out"
+if sys.platform == "win32":
+    savepath = "a.exe"
 variables = []
 
 if len(sys.argv) > 1:
@@ -145,13 +147,13 @@ if len(sys.argv) > 1:
                     "temp.py",
                     '--onefile',
                     '-n',
-                    'a.exe'
+                    savepath
                 ])
                 shutil.rmtree("build/", ignore_errors=True)
                 shutil.copyfile("dist/a.exe", "a.exe")
                 shutil.rmtree("dist/", ignore_errors=True)
                 shutil.rmtree("__pycache__/", ignore_errors=True)
-                os.remove("a.exe.spec")
+                os.remove(savepath + ".spec")
                 os.remove("temp.py")
             else:
                 exp = open(savepath, "w")
