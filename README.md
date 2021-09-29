@@ -1,11 +1,19 @@
 # Hyst
 
+- [Introduction](#Introduction)
+- [Install](#Install)
+
 ## Introduction
 
 ## Install
-- Linux
+### Linux
+First you will need:
+- python3
+- pip3
+- curl
+Execute as root:
 ```
-command here
+curl -L https://raw.githubusercontent.com/Can202/hyst-compiler/master/install-linux.sh | sudo bash
 ```
-- Windows
+### Windows
 wait
