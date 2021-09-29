@@ -16,6 +16,7 @@ path = ""
 savepath = "a.out"
 if sys.platform == "win32":
     savepath = "a.exe"
+pythonexport = False
 variables = []
 
 if len(sys.argv) > 1:
@@ -24,6 +25,8 @@ if len(sys.argv) > 1:
             continue
         elif sys.argv[u-1] == "--save":
             savepath = sys.argv[u]
+        elif sys.argv[u] == "--python":
+            pythonexport = True
         elif "--" not in sys.argv[u]:
             path = sys.argv[u]
             break
@@ -127,19 +130,11 @@ if len(sys.argv) > 1:
             save += "main()"
             save += "\n"
 
-            if sys.platform == "linux" or sys.platform == "linux2":
-                os.system("rm -vrf /tmp/hystory/")
-                os.system("mkdir -p /tmp/hystory/")
-                exp = open("/tmp/hystory/temp.py", "w")
+            if pythonexport:
+                exp = open(savepath + ".py", "w")
                 exp.write(save)
                 exp.close()
-                os.system("""
-                cd /tmp/hystory/
-                pyinstaller -F -n a.out temp.py
-                """)
-                os.system("cp /tmp/hystory/dist/a.out a.out")
-                os.system("rm -vrf /tmp/hystory/")
-            elif sys.platform == "win32":
+            else:
                 exp = open("temp.py", "w")
                 exp.write(save)
                 exp.close()
@@ -150,15 +145,11 @@ if len(sys.argv) > 1:
                     savepath
                 ])
                 shutil.rmtree("build/", ignore_errors=True)
-                shutil.copyfile("dist/a.exe", "a.exe")
+                shutil.copyfile("dist/" + savepath, savepath)
                 shutil.rmtree("dist/", ignore_errors=True)
                 shutil.rmtree("__pycache__/", ignore_errors=True)
                 os.remove(savepath + ".spec")
                 os.remove("temp.py")
-            else:
-                exp = open(savepath, "w")
-                exp.write(save)
-                exp.close()
 
         else:
             print("not hystory file")
