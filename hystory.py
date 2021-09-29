@@ -69,6 +69,11 @@ if len(sys.argv) > 1:
                             save += init + "def " + func + "():"
                         save += "\n"
                         init += "    "
+                    elif commands[i].startswith(friendname + " ask if "):
+                        func = commands[i][len(friendname + " ask if "):len(commands[i])]
+                        save += init + "if " + func + ":"
+                        save += "\n"
+                        init += "    "
                     elif commands[i].lower().startswith("principal"):
                         save += init + "def main():"
                         save += "\n"
@@ -114,7 +119,6 @@ if len(sys.argv) > 1:
                         save += "\n"
                     elif commands[i].startswith("End"):
                         if len(commands[i]) <= 3:
-                            save += init + "return 0"
                             save += "\n"
                             init = init[:-4]
                         else:
